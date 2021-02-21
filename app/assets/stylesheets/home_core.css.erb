@@ -1,7 +1,6 @@
- body{
-    background: linear-gradient(rgba(0,0,0,0) 60%, rgba(24,24,24,1)), url('<%= asset_path("hero-okinawa-sky-diet_mobile.png") %> ') center center / cover no-repeat;
-    background-color: #181818;
- }
+body{
+  /* background-color: #181818; */
+}
 
 h2 {
     font-size: 27px;
@@ -13,6 +12,7 @@ h2 {
 
 #hero-image h2{
   padding: 25vh 40px 3vh;
+  line-height: 117%;
 }
 
 .ghost-button-1 {
@@ -41,13 +41,14 @@ footer small{
 
 /* MEDIA QUERIES */
 @media screen and (min-width: 760px ) {
-     body{
-        background: linear-gradient(rgba(0,0,0,0) 60%, rgba(24,24,24,1)), url('<%= asset_path("hero-okinawa-sky_v2.png") %> ') center center / cover no-repeat;
-        background-color: #181818;
-     }
+    body{
+      background: linear-gradient(rgba(0,0,0,.2) 60%, rgba(24,24,24,.5)), url('<%= asset_path("hero-okinawa-sky-diet.jpg") %> ') center center / cover no-repeat;
+      background-color: #181818;
+    }
 
     h2 {
       font-size: 55px;
+      line-height: 120%;
     }
 
     #global-nav ul.clearfix{
@@ -61,8 +62,8 @@ footer small{
     .ghost-button-1 {
       width: 50px;
       margin: 0 auto;
-      padding: .5em 4em;
-      font-size: 24px;
+      padding: 0.1em 1.5em;
+      font-size: 45px;
     }
 
     .overlay ul li a{
@@ -85,7 +86,7 @@ footer small{
     }
     #right {
         float: right;
-        width: 250px;
+        width: 280px;
     }
 
     footer small{

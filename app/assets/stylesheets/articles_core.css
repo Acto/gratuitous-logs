@@ -4,9 +4,9 @@
 }
 
 #container {
-    width: 950px;
+    width: 980px;
     height: 100%;
-    margin: 0 auto;
+    margin: 85px auto 0;
     font-size: 14px;
     position: relative;
     clear: left;
@@ -25,7 +25,7 @@
     background-color: #fff;
 }
 #right{
-    padding: 1.25em;
+    padding: 0.5em;
     background-color: #fff;
 }
 
@@ -136,19 +136,30 @@ td#left_article_title{
 }
 .left_article_list td.left_article_list_date{
     border-bottom: 1px dotted;
-    width: all;
     text-align: right;
 }
 
+div[id^="post-ad-"] {
+    height: 100%;
+    width: 100%;
+    padding-left: 7px;
+}
+
+div[id^="right_latest_article-ad-"] {
+    height: 100%;
+    width: 100%;
+    padding-left: 2px;
+}
+
 h1.right_sub{
-    margin-right: -1.25em;
+    margin-right: 0.5em;
     border-bottom: 1px solid;
     border-color: rgba(56, 56,56, 0.2);
     font-size: 15px;
 }
 span.right_sub{
-    margin: 0 0 -1px -1.15em;
-    padding: 0 0 5px 1.15em;
+    margin: 0 0 -1px -0.5em;
+    padding: 0 0 5px 10px;
     display: inline-block;
     border-bottom: 1px solid;
     border-color: #ed9326;
@@ -179,9 +190,41 @@ span.right_sub{
     color: #3a7999;
 }
 
+#right .st_articles td{
+    padding: 2px 3px;
+    vertical-align: middle;
+}
+
+#right .right_latest_articles img.article_image{
+    width: 100px;
+    padding: 1px 3px 1px 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+#right .right_latest_articles span.article_title{
+    font-size: 12px;
+    display: inline-block;
+    line-height: 150%;
+}
+
+#right .right_latest_articles a {
+    color: #181818;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: all 1000ms ease;
+
+}
+#right .right_latest_articles a:hover {
+    background-color: rgba(230,180,80, .2);
+}
+
 /* pagination (kaminari) 関連のstyle */
 #left nav.pagination {
+    padding-top: 20px;
+    padding-bottom: 0;
     text-align: center;
+    font-size: 30px
 }
 #left nav.pagination span.current {
     border: 2px solid #ed9326;
@@ -235,5 +278,5 @@ span.right_sub{
 /*   #left { margin-right: 19.5em; } */
 /*    #right { position: absolute; top: 0; right: 0; width: 18.75em;} */
     #left { float: left; width: 690px;}
-    #right { float: right; width: 250px; }
+    #right { float: right; width: 280px; }
 }

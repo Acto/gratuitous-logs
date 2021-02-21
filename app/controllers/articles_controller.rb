@@ -2,15 +2,14 @@ class ArticlesController < ApplicationController
 
   before_action :before_load_tags
 
-  PER = 7
+  PER = ENV['ARTICLE_NUM_PER_PAGE']
 
   def index
-    # @posts = Post.all.valid.order('created_at DESC')
     @posts = Post.all.valid.order('created_at DESC')
                  .page(params[:page]).per(PER)
     @message = "最近の投稿"
-
     prepare_meta_tags( title: "最近の投稿一覧" )
+    @latest_posts = Post.all.valid.order('created_at DESC').limit(5)
     respond_to do |format|
       format.html
       format.rss
@@ -18,8 +17,12 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    target_id = params[:id]
+    @post = Post.valid.find(target_id)
     prepare_meta_tags( title: @post.title, image: @post.category.image_url )
+    # call where method and not
+    # https://stackoverflow.com/questions/5426421/rails-model-find-where-not-equal
+    @latest_posts = Post.all.valid.where.not(id: target_id).order('created_at DESC').limit(5)
   end
 
   # Find by Category_ID
@@ -27,6 +30,7 @@ class ArticlesController < ApplicationController
     @category = Category.find(params[:category_id])
     @posts = Post.valid.where(category_id: @category.id)
                  .page(params[:page]).per(PER)
+    @latest_posts = Post.all.valid.order('created_at DESC').limit(5)
 
     if @posts.count != 0
       @message = '"' + @category.name + '"カテゴリに関連する投稿'
@@ -42,21 +46,32 @@ class ArticlesController < ApplicationController
   def list_by_tag
     @tag = params[:tag_name]
     @posts = Post.valid.tagged_with(@tag)
-                 .page(params[:page]).per(PER)
+                 .page(params[:page])
+                 .per(PER)
+    @latest_posts = Post.all.valid.order('created_at DESC').limit(5)
 
     if @posts.count != 0
       @message = '"' + @tag.to_s + '" タグに関連する投稿'
+      prepare_meta_tags( title: "タグに関連する投稿一覧" )
+      render :index
     else
-      @message = '"' + @tag.to_s + '" タグに関連する投稿はありません'
-    end
+      @posts = Post.all.valid.order('created_at DESC')
+                   .page(params[:page]).per(PER)
+      @message = "最近の投稿"
 
-    prepare_meta_tags( title: "タグに関連する投稿一覧" )
-    render :index
+      prepare_meta_tags( title: "最近の投稿一覧" )
+      respond_to do |format|
+        format.html
+        format.rss
+      end
+    end
   end
 
 
   private
   def before_load_tags
-    @tags = Post.tag_counts_on(:tags)
+    # タグ数をlimitで指定
+    # http://www.workabroad.jp/posts/2151
+    @tags = Post.tag_counts_on(:tags, limit: ENV['TAG_CLOUD_PER_PAGE'].to_i)
   end
 end

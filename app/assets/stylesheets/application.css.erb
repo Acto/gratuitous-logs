@@ -22,7 +22,6 @@ body{
   counter-reset: linenumbers; /* syntax highligh用 */
   font: normal 15px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
   -webkit-font-smoothing: antialiased;
-  height: 100vh;
   background-color: #181818;
   word-break: break-all;
 }
@@ -103,14 +102,19 @@ small {
 header {
   height: 85px;
   margin: 0 0 0 0;
-  background-color: rgba(24,24,24,.5);
+  background-color: rgba(24,24,24,.6);
+  position: fixed; /* ヘッダーを固定(これが重要) */
+  top: 0; /* 固定する位置 */
+  left: 0; /* 固定する位置 */
+  right: 0;  /* 固定する位置 */
+  z-index:10; /* ful */
 }
 
 header h1 {
   font-family: 'Crete Round', serif;
   float: left;
   margin: 12px 0 0 25px;
-  width: 250px;
+  width: 280px;
 }
 
 .type-shine {
@@ -124,11 +128,18 @@ header h1 {
   content:"";
   position: absolute;
   top: 0;
-  left: -250px;
+  left: -280px;
   width: 100%;
   height: 100%;
   transform: rotate3d(0,0,1,-45deg) translate3d(0,-120%,0);
 }
+
+#container {
+  width: 980px;
+  height: 100%;
+  margin: 85px auto 0;
+}
+
 @-webkit-keyframes shine {
   0% {transform: rotate3d(0,0,1,-45deg) translate3d(0,-120%,0);background: rgba(255,255,255,0.5);}
   100% {transform: rotate3d(0,0,1,-25deg) translate3d(0,150%,0);background: rgba(255,255,255,0.5);}
@@ -162,23 +173,32 @@ header nav i.fa {
 }
 
 #hero-image {
-  height: 78vh;
-  xbackground-image: url('<%= asset_path("hero-okinawa-sky.JPG") %> ');
-  xbackground: linear-gradient(-45deg, rgba(229,93,135,.7), rgba(95,195,228,.7)), url('<%= asset_path("hero-okinawa-sky.JPG") %> ') center center / cover no-repeat;
-  xbackground: linear-gradient( cyan, transparent), linear-gradient( -45deg, magenta, transparent), linear-gradient( 45deg, yellow, transparent), url('<%= asset_path("background-sky.JPG") %> ') center center / cover no-repeat;
-  xbackground-blend-mode: multiply;
-  xbackground: linear-gradient(rgba(0,0,0,0) 60%, rgba(24,24,24,1)), url('<%= asset_path("hero-okinawa-sky.JPG") %> ') center center / cover no-repeat;
+  height: 79vh;
 }
+
 
 .wrapper{
   text-align: center;
+  animation-name: img-ani;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
 }
+
+@keyframes img-ani {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 
 .ghost-button-1 {
   width: 50px;
   margin: 0 auto;
-  padding: .5em 4em;
-  font-size: 24px;
+  padding: 0.1em 1.5em;
+  font-size: 45px;
   color: #444;
   text-align: center;
   text-decoration: none;
@@ -189,9 +209,6 @@ header nav i.fa {
   outline-color: rgba(4,4,4,1);
   outline-offset: 0;
   transition: all 1s cubic-bezier(0.19,1,.22,1);
-
-  -moz-box-sizing: none;
-  box-sizing: none;
 }
 .ghost-button-1:hover {
   border: 1px solid;

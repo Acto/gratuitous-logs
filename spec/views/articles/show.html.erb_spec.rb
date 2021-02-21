@@ -4,7 +4,7 @@ RSpec.describe "articles/show", :type => :view do  context "no data" do
     subject { render }
     before :each do
         category = create :category
-        @tags = Post.tag_counts_on(:tags)
+        @tags = Post.tag_counts_on(:tags, limit: 10)
         @post = create :valid_no_draft_post, category: category, tag_list: "TEST_TAG"
     end
 

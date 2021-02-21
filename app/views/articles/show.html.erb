@@ -1,40 +1,50 @@
 
 <div id="left">
-      <span class="left_article_date">
-        <i class="fa fa-calendar"></i>&nbsp<%= @post.created_at.strftime("%Y/%m/%d %H:%M") %>
-      </span>
+  <span class="left_article_date">
+    <i class="fa fa-calendar"></i>&nbsp<%= @post.created_at.strftime("%Y/%m/%d %H:%M") %>
+  </span>
 
-      <table>
-        <TR>
-          <td id="left_article_sumbnail">
-            <%= image_tag(@post.category.image_url, alt: @post.category.description, name: @post.category.name, class: "left_article_sumbnail") %>
-          </td>
-          <td id="left_article_title">
-            <%= @post.title %>
-          </td>
-        </TR>
-      </table>
+  <table>
+    <TR>
+      <td id="left_article_sumbnail">
+        <%= image_tag(@post.category.image_url, alt: @post.category.description, name: @post.category.name, class: "left_article_sumbnail") %>
+      </td>
+      <td id="left_article_title">
+        <%= @post.title %>
+      </td>
+    </TR>
+  </table>
 
-      <hr>
+  <hr>
 
-      <div id="left_article_tag_list">
-        <i class="fa fa-tags"></i>
-        <% @post.tags.order(:name).each do |tag| %>
-          <a href="/articles/list_by_tag/<%= tag.name %>">
-            <span class="left_article_tag"><%= "#{tag.name}(#{tag.taggings_count})" %></span>
-          </a>
-        <% end %>
-      </div>
+  <div id="left_article_tag_list">
+    <i class="fa fa-tags"></i>
+    <% @post.tags.order(:name).each do |tag| %>
+      <a href="/articles/list_by_tag/<%= tag.name %>">
+        <span class="left_article_tag"><%= "#{tag.name}(#{tag.taggings_count})" %></span>
+      </a>
+    <% end %>
+  </div>
 
-    <div id="left_article"><%= @post.contents %></div>
-    <script type="text/javascript">
-    <!--
-        GlobalM2H.convertMarkdownToHtml($("#left_article").text(), "#left_article");
-      //-->
-    </script>
+  <div id="left_article"><%= @post.contents %></div>
+  <script type="text/javascript">
+  <!--
+      GlobalM2H.convertMarkdownToHtml($("#left_article").text(), "#left_article");
+    //-->
+  </script>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- 記事内広告 -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-2710339298738466"
+       data-ad-slot="2974229814"
+       data-ad-format="auto"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
 
-    <table id="left_sns_button">
+  <table id="left_sns_button">
       <tr id="line-1">
         <td id="twitter-btn"  colspan="2">
           <a class="twitter-btn"
@@ -122,5 +132,5 @@
 </div><!-- #inner -->
 
 <div id="right">
-    <%= render 'right_contents', tags:  @tags %>
+    <%= render 'right_contents', tags:  @tags, latest_posts: @latest_posts %>
 </div><!-- #sub -->

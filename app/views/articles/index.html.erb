@@ -36,18 +36,18 @@
             </a>
         </div><!-- #post-(post-id) -->
 
-        <% if (index) % 2 == 1 %>
-            <div id="post-add" class="left_article_list" style="height:160px;width:100%;">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-format="fluid"
-                     data-ad-layout-key="-g5-51+jz-44-18y"
-                     data-ad-client="ca-pub-2710339298738466"
-                     data-ad-slot="7086108488"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+        <% if (index) % ENV['INFEED_ADSENSE_DIVISOR_NUM'].to_i == ENV['INFEED_ADSENSE_REMAINDER_NUM'].to_i %>
+            <div id="post-ad-<%= index %>" class="left_article_list">
+              <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+              <ins class="adsbygoogle"
+                   style="display:block"
+                   data-ad-format="fluid"
+                   data-ad-layout-key="-gm-21+c1-ad-fg"
+                   data-ad-client="ca-pub-2710339298738466"
+                   data-ad-slot="3042033648"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
             </div>
         <% end %>
     <% end %>
@@ -55,5 +55,5 @@
 </div><!-- #left -->
 
 <div id="right">
-    <%= render 'right_contents', tags: Post.tag_counts_on(:tags) %>
+    <%= render 'right_contents', tags: @tags %>
 </div><!-- #right -->

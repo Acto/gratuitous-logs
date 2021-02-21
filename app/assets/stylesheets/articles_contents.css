@@ -3,6 +3,13 @@
 /*   /articles/<post_id>の記事閲覧画面  */
 /* --------------------------------------------------------------------- */
 
+
+#container {
+    width: 980px;
+    height: 100%;
+    margin: 85px auto 0;
+}
+
 #left_article img {
    /* 横幅に合わせて自動縮小するが、拡大はしない */
    max-width: 100%;
@@ -64,8 +71,9 @@
 }
 
 #left_article p{
-   font-size:; /* Silence is golden; implicity 1em. */
-   line-height: 1.4;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 1.6;
 }
 
 #left_article em{
@@ -76,7 +84,6 @@
     border: 0;
     margin-top: 0;
     height:2px;
-    background: #99999e;
     background: #ccc;
     background: -webkit-gradient(linear, left top, right top, from(#333), color-stop(0.7,#ccc), color-stop(0.7,#ccc), to(#333));
     background: -moz-linear-gradient(left,#333 0%, #ccc 30%, #ccc 70%, #333 100%);

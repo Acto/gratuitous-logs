@@ -1,16 +1,44 @@
-<h1 class="right_sub">
-    <span class="right_sub">Profile</span>
-</h1>
-<img id="profile_image" src="https://pbs.twimg.com/profile_images/686205764826824705/7tYsuN7k.png", alt="kou_cs Profile Image" style="width: 100%;">
+<% if @latest_posts != nil %>
+  <h1 class="right_sub">
+      <span class="right_sub">最新の記事</span>
+  </h1>
+  <div class="right_latest_articles">
+    <% @latest_posts.each_with_index do |post, index| %>
+      <a href="/articles/<%= post.id %>">
+        <table>
+              <tr>
+                <td><%= image_tag(post.category.image_url, alt: post.category.description, name: post.category.name, class: "article_image") %></td>
+                <td><span class="article_title"><%= post.title %></span></td>
+              </tr>
+        </table>
+      </a>
+
+      <% if (index) % ENV['INFEED_ADSENSE_DIVISOR_NUM'].to_i == ENV['INFEED_ADSENSE_REMAINDER_NUM'].to_i %>
+        <div id="right_latest_article-ad-<%= index %>" class="right_latest_articles">
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-format="fluid"
+               data-ad-layout-key="-ii-k+1r-27+27"
+               data-ad-client="ca-pub-2710339298738466"
+               data-ad-slot="1686483704"></ins>
+          <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+      <% end %>
+  <% end %>
+  </div>
+<% end %>
 
 <h1 class="right_sub">
-    <span class="right_sub">Twitter Timeline</span>
+    <span class="right_sub">Twitter タイムライン</span>
 </h1>
-<a class="twitter-timeline" href="https://twitter.com/kou_cs" data-widget-id="630675718360272896" width="215px" height="300px">@kou_csさんのツイート</a>
+<a class="twitter-timeline" href="https://twitter.com/kou_cs" data-widget-id="630675718360272896" width="280px" height="300px">@kou_csさんのツイート</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 <h1 class="right_sub">
-    <span class="right_sub">Tag Clouds</span>
+    <span class="right_sub">タグ</span>
 </h1>
 <div class="right_tag_cloud">
     <% tag_cloud tags, %w{css1 css2 css3 css4} do |tag, css_class| %>
